@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.6.0/moment-timezone.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.6.0/moment-timezone-with-data-1970-2030.min.js"></script>
+    <link rel="stylesheet" href="src/style.css" />
+    <title>World Clock</title>
+  </head>
+  <body>
+    // 1. HTML Page Structure, container > header > select with the timezones >
+    button for the selection > and 3 cities and its hours on display > footer.
+    <div class="container">
+      <h1 class="heading">World Clock</h1>
+      //--------⏰ Timezone Selector ⏰--------
+      <div class="timezone-selector">
+        <label for="timezone">Select Timezone:</label>
+        <select id="timezone">
+          <option value="America/New_York">New York</option>
+          <option value="Europe/London">London</option>
+          <option value="Asia/Tokyo">Tokyo</option>
+          <option value="Australia/Sydney">Sydney</option>
+          <option value="America/Los_Angeles">Los Angeles</option>
+        </select>
+        <button id="update-time">Update Time</button>
+      </div>
+      <div class="cities">
+        <div class="city" id="new-york">
+          <h2>New York</h2>
+          <p class="date"></p>
+          <p class="time"></p>
+        </div>
+        <div class="city" id="london">
+          <h2>London</h2>
+          <p class="date"></p>
+          <p class="time"></p>
+        </div>
+        <div class="city" id="tokyo">
+          <h2>Tokyo</h2>
+          <p class="date"></p>
+          <p class="time"></p>
+        </div>
+      </div>
+      <footer>
+        <p>
+          &copy; 2025
+          <a
+            href="https://selective-raft-f01.notion.site/1b1b9736465580578a5bf5be4d4418d4?source=copy_link"
+            target="_blank"
+            ><strong>Cindy Mikoda</strong></a
+          >
+          —
+          <a href="https://github.com/cindymikoda/WorldClock" target="_blank"
+            >GitHub Repository</a
+          >
+          |
+          <a href="https://world-clock-taupe-tau.vercel.app/" target="_blank"
+            >Live on Vercel</a
+          >
+        </p>
+      </footer>
+    </div>
+  </body>
+  <script src="src/script.js"></script>
+</html>
