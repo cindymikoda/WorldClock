@@ -1,11 +1,20 @@
-// 🌐 Default cities
-const defaultCities = [
-  { name: "New York", timezone: "America/New_York" },
-  { name: "London", timezone: "Europe/London" },
-  { name: "Tokyo", timezone: "Asia/Tokyo" },
-];
+// Default city configuration
+const defaultCity = {
+  name: "New York",
+  timezone: "America/New_York",
+};
 
-// ⏰Format and display time for a city
+// Extract city name from timezone
+function getCityNameFromTimezone(timezone) {
+  // Split timezone by '/' and get the last part (city name)
+  const parts = timezone.split("/");
+  const cityPart = parts[parts.length - 1];
+
+  // Replace underscores with spaces and capitalize each word
+  return cityPart.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
+}
+
+// Format and display time for a city
 function updateCityTime(cityElement, timezone) {
   const now = moment().tz(timezone);
   const date = now.format("MMMM DD, YYYY");
@@ -17,69 +26,74 @@ function updateCityTime(cityElement, timezone) {
   if (timeElement) timeElement.textContent = time;
 }
 
-// 🔀 Replace New York with selected timezone
-function replaceNewYorkWithSelected() {
+// Update the displayed city based on selectiona
+function updateDisplayedCity() {
   const select = document.getElementById("timezone");
-  const selectedTimezone = select.value;
+  const selectedValue = select.value;
+  const cityElement = document.getElementById("city");
 
-  if (!selectedTimezone) {
-    return;
+  if (!selectedValue || !cityElement) return;
+
+  let timezone, cityName;
+
+  if (selectedValue === "current") {
+    // Use user's current timezone
+    timezone = moment.tz.guess();
+    cityName = getCityNameFromTimezone(timezone);
+  } else {
+    // Use selected timezone
+    timezone = selectedValue;
+    // Get city name from the selected option text
+    const selectedOption = select.options[select.selectedIndex];
+    cityName = selectedOption.textContent;
   }
 
-  // Get city name from the selected option text
-  const selectedOption = select.options[select.selectedIndex];
-  const cityName = selectedOption.textContent;
-
-  // Get the New York city element
-  const newYorkElement = document.getElementById("new-york");
-  if (newYorkElement) {
-    // Update the city name
-    const cityNameElement = newYorkElement.querySelector("h2");
-    if (cityNameElement) {
-      cityNameElement.textContent = cityName;
-    }
-
-    // Update the data-timezone attribute
-    newYorkElement.setAttribute("data-timezone", selectedTimezone);
-
-    // Update the time for the new timezone
-    updateCityTime(newYorkElement, selectedTimezone);
+  // Update the city name and timezone
+  const cityNameElement = cityElement.querySelector("h2");
+  if (cityNameElement) {
+    cityNameElement.textContent = cityName;
   }
+
+  // Update the data-timezone attribute
+  cityElement.setAttribute("data-timezone", timezone);
+
+  // Update the time immediately
+  updateCityTime(cityElement, timezone);
 }
 
-// Update all cities
-function updateAllDisplayedCities() {
-  const allCities = document.querySelectorAll(".city");
+// Update displayed city
+function updateAllCities() {
+  const cityElement = document.getElementById("city");
+  if (!cityElement) return;
 
-  allCities.forEach((cityElement) => {
-    const timezone = cityElement.getAttribute("data-timezone");
-    if (timezone) {
-      updateCityTime(cityElement, timezone);
-    }
-  });
+  const timezone = cityElement.getAttribute("data-timezone");
+  if (timezone) {
+    updateCityTime(cityElement, timezone);
+  }
 }
 
 // Initialize the application
 function init() {
-  defaultCities.forEach((city) => {
-    const cityElement = document.getElementById(
-      city.name.toLowerCase().replace(" ", "-")
-    );
-    if (cityElement) {
-      cityElement.setAttribute("data-timezone", city.timezone);
+  // Set up default city
+  const cityElement = document.getElementById("city");
+  if (cityElement) {
+    cityElement.setAttribute("data-timezone", defaultCity.timezone);
+    const cityNameElement = cityElement.querySelector("h2");
+    if (cityNameElement) {
+      cityNameElement.textContent = defaultCity.name;
     }
-  });
+  }
 
   // Initial time update
-  updateAllDisplayedCities();
+  updateAllCities();
 
   // Update time every second
-  setInterval(updateAllDisplayedCities, 1000);
+  setInterval(updateAllCities, 1000);
 
   // Add event listener to update button
   const updateButton = document.getElementById("update-time");
   if (updateButton) {
-    updateButton.addEventListener("click", replaceNewYorkWithSelected);
+    updateButton.addEventListener("click", updateDisplayedCity);
   }
 
   // Add event listener to select dropdown
@@ -88,10 +102,11 @@ function init() {
     timezoneSelect.addEventListener("change", function () {
       if (this.value) {
         console.log("Selected timezone:", this.value);
+        // Wait for button click to updatete
       }
     });
   }
 }
 
-// Start the application when DOM is loaded
+// Start the application
 document.addEventListener("DOMContentLoaded", init);

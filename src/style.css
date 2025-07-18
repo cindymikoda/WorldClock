@@ -120,23 +120,6 @@ button:hover {
   justify-self: end;
 }
 
-#new-york {
-  background-color: #ffffff;
-  border: 1px solid #1a1a1a;
-}
-
-#new-york h2 {
-  color: #000000;
-}
-
-#new-york .date {
-  color: #333333;
-}
-
-#new-york .time {
-  color: #000000;
-}
-
 footer {
   text-align: center;
   margin-top: 30px;
