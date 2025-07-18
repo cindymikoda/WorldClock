@@ -171,3 +171,19 @@ footer {
     gap: 10px;
   }
 }
+.blink-border {
+  animation: blink 0.2s ease-in-out 2;
+  border: 2px solid hotpink !important;
+}
+
+@keyframes blink {
+  0% {
+    border-color: hotpink;
+  }
+  50% {
+    border-color: transparent;
+  }
+  100% {
+    border-color: hotpink;
+  }
+}

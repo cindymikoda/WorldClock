@@ -3,57 +3,53 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!---------- 📚 Libraries 📚---------->
+    <title>World Clock</title>
+    <!-- ⏰ Moment.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.6.0/moment-timezone.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.6.0/moment-timezone-with-data-1970-2030.min.js"></script>
     <link rel="stylesheet" href="src/style.css" />
-    <title>World Clock</title>
   </head>
   <body>
-    <!----------🌍 World Clock 🌍---------->
-
     <div class="container">
       <h1><a href="/">World Clock</a></h1>
-      <!--------⏰ Timezone Selector ⏰-------->
+
       <div class="timezone-selector">
         <label for="timezone">Select Timezone:</label>
         <select id="timezone">
+          <option value="">Select a timezone...</option>
           <option value="current">Your location</option>
-          <option value="America/Chicago">Chicago</option>
-          <option value="America/Lima">Lima</option>
-          <option value="America/Los_Angeles">Los Angeles</option>
-          <option value="America/Mexico_City">Mexico City</option>
           <option value="America/New_York">New York</option>
-          <option value="America/Sao_Paulo">Sao Paulo</option>
-          <option value="America/Vancouver">Vancouver</option>
-          <option value="Asia/Bangkok">Bangkok</option>
-          <option value="Asia/Dubai">Dubai</option>
-          <option value="Asia/Hong_Kong">Hong Kong</option>
-          <option value="Asia/Seoul">Seoul</option>
-          <option value="Asia/Shanghai">Shanghai</option>
-          <option value="Asia/Singapore">Singapore</option>
-          <option value="Asia/Tokyo">Tokyo</option>
-          <option value="Australia/Sydney">Sydney</option>
-          <option value="Europe/Berlin">Berlin</option>
           <option value="Europe/London">London</option>
-          <option value="Europe/Madrid">Madrid</option>
-          <option value="Europe/Moscow">Moscow</option>
+          <option value="Asia/Tokyo">Tokyo</option>
           <option value="Europe/Paris">Paris</option>
-          <option value="Pacific/Auckland">Auckland</option>
+          <option value="Asia/Seoul">Seoul</option>
+          <option value="America/Sao_Paulo">Sao Paulo</option>
+          <option value="Australia/Sydney">Sydney</option>
+          <option value="America/Los_Angeles">Los Angeles</option>
+          <option value="Asia/Dubai">Dubai</option>
+          <option value="Asia/Kolkata">Kolkata</option>
         </select>
-        <!--------🔄 Update Time Button 🔄-------->
         <button id="update-time">Update Time</button>
       </div>
-      <!--------🌆 City Time Displays 🌆-------->
+
       <div class="cities">
-        <div class="city" id="city" data-timezone="current">
+        <div class="city" id="city1" data-timezone="America/New_York">
           <h2>New York</h2>
           <p class="date">Loading...</p>
           <p class="time">Loading...</p>
         </div>
+        <div class="city" id="city2" data-timezone="Europe/London">
+          <h2>London</h2>
+          <p class="date">Loading...</p>
+          <p class="time">Loading...</p>
+        </div>
+        <div class="city" id="city3" data-timezone="Asia/Tokyo">
+          <h2>Tokyo</h2>
+          <p class="date">Loading...</p>
+          <p class="time">Loading...</p>
+        </div>
       </div>
-      <!--------🌐 Footer 🌐-------->
+
       <footer>
         <p>
           &copy; 2025
@@ -80,6 +76,7 @@
         </p>
       </footer>
     </div>
+
+    <script src="src/script.js"></script>
   </body>
-  <script src="src/script.js"></script>
 </html>
